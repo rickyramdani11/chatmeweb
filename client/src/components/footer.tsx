@@ -7,10 +7,10 @@ export default function Footer() {
       title: "Fitur",
       color: "text-purple-main",
       links: [
-        { name: "Chat Real-time", href: "#" },
-        { name: "Mini Games", href: "#" },
-        { name: "Virtual Gifts", href: "#" },
-        { name: "Multi Rooms", href: "#" }
+        {name: "Chat Real-time", href: "intent://open#Intent;scheme=chatme;package=com.chatme1.app;end" },
+        {  name: "Game", href: "intent://open#Intent;scheme=chatme;package=com.chatme1.app;end" } ,
+        { name: "Virtual Gifts", href: "intent://open#Intent;scheme=chatme;package=com.chatme1.app;end"},
+        { name: "Multi Rooms", href: "intent://open#Intent;scheme=chatme;package=com.chatme1.app;end" },
       ]
     },
     {
@@ -26,9 +26,9 @@ export default function Footer() {
   ];
 
   const socialLinks = [
-    { icon: Facebook, href: "#", color: "hover:bg-purple-main/50" },
-    { icon: Instagram, href: "#", color: "hover:bg-pink-gift/50" },
-    { icon: Twitter, href: "#", color: "hover:bg-blue-chat/50" },
+    { icon: Facebook, href: "https://www.facebook.com/share/1BGG7DpVCT/", color: "hover:bg-purple-main/50" },
+    { icon: Instagram, href: "https://www.instagram.com/chatmeoffice?igsh=a2ppenAzdTQ5YWE0", color: "hover:bg-pink-gift/50" },
+    { icon: Twitter, href: "https://x.com/Chatmeapps?t=a1qjC9c8yORIP5IFIw8lcA&s=09", color: "hover:bg-blue-chat/50" },
     { 
       icon: () => (
         <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -112,6 +112,8 @@ export default function Footer() {
                 <motion.a
                   key={index}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   className={`w-10 h-10 bg-white/10 rounded-full flex items-center justify-center ${social.color} transition-colors`}
@@ -131,7 +133,7 @@ export default function Footer() {
           transition={{ duration: 0.6, delay: 0.5 }}
           viewport={{ once: true }}
         >
-          <p>&copy; 2024 ChatMe. All rights reserved. Made with ❤️ for awesome conversations!</p>
+          <p>&copy; 2025 ChatMe. All rights reserved. Made with ChatMe app for awesome conversations!</p>
         </motion.div>
       </div>
     </footer>

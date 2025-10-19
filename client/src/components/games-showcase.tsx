@@ -33,7 +33,8 @@ export default function GamesShowcase() {
       gradient: "from-purple-main/30 to-pink-gift/30",
       borderColor: "hover:border-purple-main/50",
       buttonGradient: "from-purple-main to-pink-gift",
-      buttonText: "Main Sekarang"
+      buttonText: "Main Sekarang",
+      deepLink: "chatme://open"
     },
     {
       icon: Dice6,
@@ -42,7 +43,8 @@ export default function GamesShowcase() {
       gradient: "from-blue-chat/30 to-purple-light/30",
       borderColor: "hover:border-blue-chat/50",
       buttonGradient: "from-blue-chat to-purple-light",
-      buttonText: "Main Sekarang"
+      buttonText: "Main Sekarang",
+      deepLink: "chatme://open"
     },
     {
       icon: Plus,
@@ -149,12 +151,24 @@ export default function GamesShowcase() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Button 
-                    className={`bg-gradient-to-r ${game.buttonGradient} px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition-all duration-300`}
-                    data-testid={`button-play-${index}`}
-                  >
-                    {game.buttonText}
-                  </Button>
+                  {game.deepLink ? (
+                    <Button 
+                      asChild
+                      className={`bg-gradient-to-r ${game.buttonGradient} px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition-all duration-300`}
+                      data-testid={`button-play-${index}`}
+                    >
+                      <a href={game.deepLink}>
+                        {game.buttonText}
+                      </a>
+                    </Button>
+                  ) : (
+                    <Button 
+                      className={`bg-gradient-to-r ${game.buttonGradient} px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition-all duration-300`}
+                      data-testid={`button-play-${index}`}
+                    >
+                      {game.buttonText}
+                    </Button>
+                  )}
                 </motion.div>
               </div>
             </motion.div>
