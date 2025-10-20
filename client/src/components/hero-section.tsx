@@ -1,9 +1,11 @@
 import { motion } from "framer-motion";
 import { Download, Play, MessageCircle, Gamepad2, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { downloadConfig } from "@/config/download";
+import { useDownloadConfig } from "@/hooks/useDownloadConfig";
 
 export default function HeroSection() {
+  const downloadConfig = useDownloadConfig();
+  
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

@@ -2,10 +2,11 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { MessageCircle, Menu, X, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { downloadConfig } from "@/config/download";
+import { useDownloadConfig } from "@/hooks/useDownloadConfig";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const downloadConfig = useDownloadConfig();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);

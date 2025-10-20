@@ -74,21 +74,28 @@ Preferred communication style: Simple, everyday language.
 ## Download Configuration
 
 ### APK Download System
-The application includes a flexible download configuration system located in `client/src/config/download.ts` that allows easy management of APK downloads:
+The application includes a flexible download configuration system using a JSON configuration file (`client/public/config.json`) that allows easy management of APK downloads **after build and deployment**:
 
 **Features:**
 - Smart download buttons that automatically switch between APK download and Play Store redirect
-- Central configuration file for easy URL updates
+- JSON configuration file that can be edited directly on cPanel after deployment
+- No rebuild required when updating APK URLs
 - Support for cPanel-hosted APK files
 - Fallback to Play Store when APK URL is not configured
+- React hook (`useDownloadConfig`) that fetches configuration at runtime
 
 **Download Buttons:**
 1. **Hero Section** - Main "Download Sekarang" button
 2. **Navigation Bar** - "Download" button (desktop & mobile)
 3. **CTA Section** - "Download di Play Store" button (always links to Play Store)
 
-**Configuration:**
-Update `client/src/config/download.ts` with your cPanel APK URL after uploading the file. See `CARA_UPDATE_DOWNLOAD.md` for detailed instructions.
+**Configuration Files:**
+- Source: `client/public/config.json` (gets copied to dist during build)
+- Production: `public_html/config.json` (editable on cPanel without rebuild)
+- Hook: `client/src/hooks/useDownloadConfig.ts` (fetches config at runtime)
+
+**Post-Deployment Updates:**
+Simply edit `config.json` on your cPanel to update the APK download URL without rebuilding the entire application. See `CARA_UPDATE_DOWNLOAD.md` for detailed instructions.
 
 ## Deep Links
 

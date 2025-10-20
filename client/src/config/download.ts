@@ -1,4 +1,0 @@
-export const downloadConfig = {
-  apkUrl: "",
-  playStoreUrl: "https://play.google.com/store/apps/details?id=com.chatme1.app"
-};
