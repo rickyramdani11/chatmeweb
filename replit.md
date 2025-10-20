@@ -109,3 +109,22 @@ The application includes deep link support for opening the ChatMe app directly:
 - Facebook: https://www.facebook.com/share/1BGG7DpVCT/
 - Instagram: https://www.instagram.com/chatmeoffice
 - Twitter: https://x.com/Chatmeapps
+
+## Privacy Policy
+
+A standalone Privacy Policy page is available at `/privacy-policy.html`:
+
+**Location:**
+- Source: `client/public/privacy-policy.html` (automatically copied to dist during build)
+- Production: Available at `https://yourdomain.com/privacy-policy.html`
+- Linked in footer under "Support" section
+
+**Content Includes:**
+- Information collection practices
+- How user data is used
+- Data sharing policies
+- User rights
+- Security measures
+- Contact information (noreply@chatmeapp.online)
+
+**Effective Date:** October 19, 2025

@@ -20,7 +20,7 @@ export default function Footer() {
         { name: "Help Center", href: "#" },
         { name: "FAQ", href: "#" },
         { name: "Contact Us", href: "#" },
-        { name: "Privacy Policy", href: "#" }
+        { name: "Privacy Policy", href: "/privacy-policy.html" }
       ]
     }
   ];
