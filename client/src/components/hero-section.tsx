@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Download, Play, MessageCircle, Gamepad2, Gift } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { downloadConfig } from "@/config/download";
 
 export default function HeroSection() {
   const containerVariants = {
@@ -109,12 +110,20 @@ export default function HeroSection() {
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button 
+                asChild
                 size="lg"
                 className="bg-gradient-to-r from-purple-main to-pink-gift px-8 py-4 rounded-full font-bold text-lg hover:shadow-xl hover:shadow-purple-main/30 transition-all duration-300"
                 data-testid="button-download-hero"
               >
-                <Download className="w-5 h-5 mr-2" />
-                Download Sekarang
+                <a 
+                  href={downloadConfig.apkUrl || downloadConfig.playStoreUrl}
+                  download={downloadConfig.apkUrl ? "ChatMe.apk" : undefined}
+                  target={downloadConfig.apkUrl ? "_self" : "_blank"}
+                  rel={downloadConfig.apkUrl ? undefined : "noopener noreferrer"}
+                >
+                  <Download className="w-5 h-5 mr-2" />
+                  Download Sekarang
+                </a>
               </Button>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>

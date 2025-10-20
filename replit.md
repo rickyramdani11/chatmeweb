@@ -70,3 +70,35 @@ Preferred communication style: Simple, everyday language.
 - **date-fns**: Modern JavaScript date utility library
 - **nanoid**: URL-safe unique string ID generator
 - **wouter**: Minimalist routing library for React applications
+
+## Download Configuration
+
+### APK Download System
+The application includes a flexible download configuration system located in `client/src/config/download.ts` that allows easy management of APK downloads:
+
+**Features:**
+- Smart download buttons that automatically switch between APK download and Play Store redirect
+- Central configuration file for easy URL updates
+- Support for cPanel-hosted APK files
+- Fallback to Play Store when APK URL is not configured
+
+**Download Buttons:**
+1. **Hero Section** - Main "Download Sekarang" button
+2. **Navigation Bar** - "Download" button (desktop & mobile)
+3. **CTA Section** - "Download di Play Store" button (always links to Play Store)
+
+**Configuration:**
+Update `client/src/config/download.ts` with your cPanel APK URL after uploading the file. See `CARA_UPDATE_DOWNLOAD.md` for detailed instructions.
+
+## Deep Links
+
+The application includes deep link support for opening the ChatMe app directly:
+
+**Game Deep Links:**
+- Lowcard game: `chatme://open`
+- Sicbo game: `chatme://open`
+
+**Social Media Links:**
+- Facebook: https://www.facebook.com/share/1BGG7DpVCT/
+- Instagram: https://www.instagram.com/chatmeoffice
+- Twitter: https://x.com/Chatmeapps

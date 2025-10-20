@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { MessageCircle, Menu, X, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { downloadConfig } from "@/config/download";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -61,11 +62,19 @@ export default function Navigation() {
             </button>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button 
+                asChild
                 className="bg-gradient-to-r from-purple-main to-pink-gift px-6 py-2 rounded-full font-semibold hover:shadow-lg hover:shadow-purple-main/25 transition-all duration-300"
                 data-testid="button-download-nav"
               >
-                <Download className="w-4 h-4 mr-2" />
-                Download
+                <a 
+                  href={downloadConfig.apkUrl || downloadConfig.playStoreUrl}
+                  download={downloadConfig.apkUrl ? "ChatMe.apk" : undefined}
+                  target={downloadConfig.apkUrl ? "_self" : "_blank"}
+                  rel={downloadConfig.apkUrl ? undefined : "noopener noreferrer"}
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Download
+                </a>
               </Button>
             </motion.div>
           </div>
@@ -115,11 +124,19 @@ export default function Navigation() {
                 Hadiah
               </button>
               <Button 
+                asChild
                 className="bg-gradient-to-r from-purple-main to-pink-gift px-6 py-2 rounded-full font-semibold w-fit"
                 data-testid="button-download-mobile"
               >
-                <Download className="w-4 h-4 mr-2" />
-                Download
+                <a 
+                  href={downloadConfig.apkUrl || downloadConfig.playStoreUrl}
+                  download={downloadConfig.apkUrl ? "ChatMe.apk" : undefined}
+                  target={downloadConfig.apkUrl ? "_self" : "_blank"}
+                  rel={downloadConfig.apkUrl ? undefined : "noopener noreferrer"}
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Download
+                </a>
               </Button>
             </div>
           </motion.div>
