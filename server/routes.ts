@@ -50,9 +50,36 @@ export async function registerRoutes(app: Express): Promise<Server> {
     });
   });
 
+  // Get list of uploaded APK files
+  app.get('/api/apk-files', (req, res) => {
+    try {
+      if (!fs.existsSync(uploadDir)) {
+        return res.json({ files: [] });
+      }
+
+      const files = fs.readdirSync(uploadDir)
+        .filter(file => file.endsWith('.apk'))
+        .map(filename => {
+          const filePath = path.join(uploadDir, filename);
+          const stats = fs.statSync(filePath);
+          return {
+            filename,
+            size: stats.size,
+            uploadDate: stats.mtime.toISOString()
+          };
+        })
+        .sort((a, b) => new Date(b.uploadDate).getTime() - new Date(a.uploadDate).getTime());
+
+      res.json({ files });
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to read files' });
+    }
+  });
+
   // Serve uploaded files
   app.use('/uploads', (req, res, next) => {
     res.setHeader('Content-Type', 'application/vnd.android.package-archive');
+    res.setHeader('Content-Disposition', `attachment; filename="${path.basename(req.path)}"`);
     next();
   }, (req, res, next) => {
     const filePath = path.join(uploadDir, path.basename(req.path));

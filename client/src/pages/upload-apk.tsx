@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Upload, FileCheck, Loader2 } from "lucide-react";
+import { Upload, FileCheck, Loader2, Download } from "lucide-react";
+import { Link } from "wouter";
 
 export default function UploadApk() {
   const [file, setFile] = useState<File | null>(null);
@@ -127,6 +128,13 @@ export default function UploadApk() {
               </>
             )}
           </Button>
+
+          <Link href="/download-apk">
+            <Button variant="outline" className="w-full">
+              <Download className="mr-2 h-4 w-4" />
+              View Uploaded Files
+            </Button>
+          </Link>
         </CardContent>
       </Card>
     </div>
