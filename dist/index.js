@@ -153,6 +153,8 @@ async function setupVite(app2, server) {
     server: serverOptions,
     appType: "custom"
   });
+  const uploadsPath = path3.resolve(import.meta.dirname, "..", "uploads");
+  app2.use("/uploads", express.static(uploadsPath));
   app2.use(vite.middlewares);
   app2.use("*", async (req, res, next) => {
     const url = req.originalUrl;
@@ -183,6 +185,8 @@ function serveStatic(app2) {
       `Could not find the build directory: ${distPath}, make sure to build the client first`
     );
   }
+  const uploadsPath = path3.resolve(import.meta.dirname, "..", "uploads");
+  app2.use("/uploads", express.static(uploadsPath));
   app2.use(express.static(distPath));
   app2.use("*", (_req, res) => {
     res.sendFile(path3.resolve(distPath, "index.html"));
