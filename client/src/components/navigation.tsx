@@ -69,9 +69,8 @@ export default function Navigation() {
               >
                 <a 
                   href={downloadConfig.apkUrl || downloadConfig.playStoreUrl}
-                  download={downloadConfig.apkUrl ? "ChatMe.apk" : undefined}
-                  target={downloadConfig.apkUrl ? "_self" : "_blank"}
-                  rel={downloadConfig.apkUrl ? undefined : "noopener noreferrer"}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Download className="w-4 h-4 mr-2" />
                   Download
@@ -131,9 +130,8 @@ export default function Navigation() {
               >
                 <a 
                   href={downloadConfig.apkUrl || downloadConfig.playStoreUrl}
-                  download={downloadConfig.apkUrl ? "ChatMe.apk" : undefined}
-                  target={downloadConfig.apkUrl ? "_self" : "_blank"}
-                  rel={downloadConfig.apkUrl ? undefined : "noopener noreferrer"}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Download className="w-4 h-4 mr-2" />
                   Download

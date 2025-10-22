@@ -119,9 +119,8 @@ export default function HeroSection() {
               >
                 <a 
                   href={downloadConfig.apkUrl || downloadConfig.playStoreUrl}
-                  download={downloadConfig.apkUrl ? "ChatMe.apk" : undefined}
-                  target={downloadConfig.apkUrl ? "_self" : "_blank"}
-                  rel={downloadConfig.apkUrl ? undefined : "noopener noreferrer"}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Download className="w-5 h-5 mr-2" />
                   Download Sekarang
