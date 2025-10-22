@@ -158,6 +158,9 @@ async function setupVite(app2, server) {
   app2.use(vite.middlewares);
   app2.use("*", async (req, res, next) => {
     const url = req.originalUrl;
+    if (url.startsWith("/uploads")) {
+      return next();
+    }
     try {
       const clientTemplate = path3.resolve(
         import.meta.dirname,
@@ -188,7 +191,10 @@ function serveStatic(app2) {
   const uploadsPath = path3.resolve(import.meta.dirname, "..", "uploads");
   app2.use("/uploads", express.static(uploadsPath));
   app2.use(express.static(distPath));
-  app2.use("*", (_req, res) => {
+  app2.use("*", (req, res, next) => {
+    if (req.originalUrl.startsWith("/uploads")) {
+      return next();
+    }
     res.sendFile(path3.resolve(distPath, "index.html"));
   });
 }
