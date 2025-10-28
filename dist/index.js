@@ -92,38 +92,36 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path2 from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
-var vite_config_default = defineConfig(async () => {
-  const plugins = [
+var vite_config_default = defineConfig({
+  base: "./",
+  // 🟢 WAJIB: biar asset pakai path relatif
+  plugins: [
     react(),
-    runtimeErrorOverlay()
-  ];
-  if (process.env.NODE_ENV !== "production" && process.env.REPL_ID !== void 0) {
-    const { cartographer } = await import("@replit/vite-plugin-cartographer");
-    plugins.push(cartographer());
-  }
-  return {
-    base: "./",
-    // ✅ Penting: agar asset relatif & tampil benar di GitHub Pages
-    plugins,
-    resolve: {
-      alias: {
-        "@": path2.resolve(import.meta.dirname, "client", "src"),
-        "@shared": path2.resolve(import.meta.dirname, "shared"),
-        "@assets": path2.resolve(import.meta.dirname, "attached_assets")
-      }
-    },
-    root: path2.resolve(import.meta.dirname, "client"),
-    build: {
-      outDir: path2.resolve(import.meta.dirname, "dist/public"),
-      emptyOutDir: true
-    },
-    server: {
-      fs: {
-        strict: true,
-        deny: ["**/.*"]
-      }
+    runtimeErrorOverlay(),
+    ...process.env.NODE_ENV !== "production" && process.env.REPL_ID !== void 0 ? [
+      await import("@replit/vite-plugin-cartographer").then(
+        (m) => m.cartographer()
+      )
+    ] : []
+  ],
+  resolve: {
+    alias: {
+      "@": path2.resolve(import.meta.dirname, "client", "src"),
+      "@shared": path2.resolve(import.meta.dirname, "shared"),
+      "@assets": path2.resolve(import.meta.dirname, "attached_assets")
     }
-  };
+  },
+  root: path2.resolve(import.meta.dirname, "client"),
+  build: {
+    outDir: path2.resolve(import.meta.dirname, "dist/public"),
+    emptyOutDir: true
+  },
+  server: {
+    fs: {
+      strict: true,
+      deny: ["**/.*"]
+    }
+  }
 });
 
 // server/vite.ts
