@@ -3,10 +3,12 @@ name: Build and Deploy to GitHub Pages
 on:
   push:
     branches: [ "main" ]
+  workflow_dispatch:  # ✅ Tambahkan ini biar bisa Run workflow manual
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -27,3 +29,4 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist/public
+          cname: chatmeapp.my.id  # ✅ Tambahkan ini agar domain custom tetap aktif
