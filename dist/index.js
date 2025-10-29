@@ -1,6 +1,8 @@
 // server/index.ts
 import express2 from "express";
 import cors from "cors";
+import path4 from "path";
+import { fileURLToPath } from "url";
 
 // server/routes.ts
 import { createServer } from "http";
@@ -202,17 +204,20 @@ function serveStatic(app2) {
 }
 
 // server/index.ts
+var __filename = fileURLToPath(import.meta.url);
+var __dirname = path4.dirname(__filename);
 var app = express2();
 app.use(cors({
   origin: "*",
-  // Untuk production, ganti dengan domain frontend Anda
+  // ⚠️ nanti ganti dengan domain frontend kamu
   credentials: true
 }));
 app.use(express2.json());
 app.use(express2.urlencoded({ extended: false }));
+app.use("/games", express2.static(path4.join(__dirname, "../client/games")));
 app.use((req, res, next) => {
   const start = Date.now();
-  const path4 = req.path;
+  const pathReq = req.path;
   let capturedJsonResponse = void 0;
   const originalResJson = res.json;
   res.json = function(bodyJson, ...args) {
@@ -221,8 +226,8 @@ app.use((req, res, next) => {
   };
   res.on("finish", () => {
     const duration = Date.now() - start;
-    if (path4.startsWith("/api")) {
-      let logLine = `${req.method} ${path4} ${res.statusCode} in ${duration}ms`;
+    if (pathReq.startsWith("/api")) {
+      let logLine = `${req.method} ${pathReq} ${res.statusCode} in ${duration}ms`;
       if (capturedJsonResponse) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
@@ -248,11 +253,15 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
   const port = parseInt(process.env.PORT || "5000", 10);
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true
-  }, () => {
-    log(`serving on port ${port}`);
-  });
+  server.listen(
+    {
+      port,
+      host: "0.0.0.0",
+      reusePort: true
+    },
+    () => {
+      log(`\u2705 Server running on port ${port}`);
+      log(`\u{1F3B0} Slot game available at /games/slot/`);
+    }
+  );
 })();
