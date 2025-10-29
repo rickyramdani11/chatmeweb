@@ -209,7 +209,7 @@ var __dirname = path4.dirname(__filename);
 var app = express2();
 app.use(cors({
   origin: "*",
-  // ⚠️ nanti ganti dengan domain frontend kamu
+  // ⚠️ Ganti dengan domain frontend kamu nanti
   credentials: true
 }));
 app.use(express2.json());
@@ -231,9 +231,7 @@ app.use((req, res, next) => {
       if (capturedJsonResponse) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
-      if (logLine.length > 80) {
-        logLine = logLine.slice(0, 79) + "\u2026";
-      }
+      if (logLine.length > 80) logLine = logLine.slice(0, 79) + "\u2026";
       log(logLine);
     }
   });
@@ -250,6 +248,14 @@ app.use((req, res, next) => {
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
+    const distPath = path4.join(__dirname, "../dist/public");
+    app.use(express2.static(distPath));
+    app.get("/child-safety", (_req, res) => {
+      res.sendFile(path4.join(distPath, "child-safety.html"));
+    });
+    app.get("*", (_req, res) => {
+      res.sendFile(path4.join(distPath, "index.html"));
+    });
     serveStatic(app);
   }
   const port = parseInt(process.env.PORT || "5000", 10);
@@ -262,6 +268,7 @@ app.use((req, res, next) => {
     () => {
       log(`\u2705 Server running on port ${port}`);
       log(`\u{1F3B0} Slot game available at /games/slot/`);
+      log(`\u{1F7E2} Child Safety page at /child-safety`);
     }
   );
 })();

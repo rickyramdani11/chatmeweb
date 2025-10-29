@@ -1,0 +1,175 @@
+/* style.css — lengkap, dibuat untuk tampilan seperti gambar ke-2 */
+
+/* ---------- Page / Background ---------- */
+:root{
+  --reel-width: 120px;
+  --reel-height: 320px; /* tinggi agar muat 4 simbol */
+  --symbol-height: 72px; /* 4 simbol => 4 * 72 = 288px (+ padding) */
+  --reel-gap: 18px;
+  --accent: #ffcf40;
+  --accent-2: #ff6f00;
+}
+
+* { box-sizing: border-box; }
+html,body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: radial-gradient(circle at 20% 20%, #2a0a3a 0%, #110013 60%, #020006 100%);
+  color: #fff;
+}
+
+/* ---------- Header / Title ---------- */
+header {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  margin-top: 32px;
+  margin-bottom: 8px;
+}
+h1 {
+  font-size: 2rem;
+  margin: 0;
+  padding: 0 8px;
+  color: #fff;
+  text-shadow: 0 0 20px rgba(255,200,64,0.6), 0 0 40px rgba(255,100,40,0.25);
+  letter-spacing: 0.5px;
+}
+
+/* ---------- Main container ---------- */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 12px;
+}
+
+/* reels wrapper */
+.slot-wrap {
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  gap: var(--reel-gap);
+  width: 100%;
+  max-width: 960px;
+  padding: 12px;
+}
+
+/* ---------- Single reel style ---------- */
+.reel {
+  width: var(--reel-width);
+  height: var(--reel-height);
+  background: linear-gradient(180deg, rgba(0,0,0,0.85), rgba(10,10,10,0.9));
+  border-radius: 14px;
+  border: 6px solid rgba(0,0,0,0); /* default invisible border */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 -6px 20px rgba(0,0,0,0.6);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* edge light (kiri reel pada gambar ke-2) — gunakan class .active pada reel untuk tampil kuning */
+.reel.active {
+  border-color: var(--accent);
+  box-shadow: 0 12px 35px rgba(255,200,64,0.16), 0 0 60px rgba(255,140,40,0.08), inset 0 -6px 20px rgba(0,0,0,0.6);
+  background: linear-gradient(180deg, #ffc84722, #000000aa);
+}
+
+/* inner stack yang bergerak — kita pakai transform translateY */
+.reel-inner {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.1s linear;
+  will-change: transform;
+  transform: translateY(0);
+}
+
+.symbol {
+  height: 75px; /* sama seperti symbolHeight di JS */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* simbol "bagian bawah" hitam pada gambar ke-2 (opsional style) */
+.reel .symbol.bottom {
+  background: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.95));
+}
+
+/* simbol saat menang / highlight */
+.symbol.win {
+  background: linear-gradient(180deg, #ffd966, #ffcc40);
+  color: #111;
+  transform: scale(1.14);
+  box-shadow: 0 0 18px rgba(255,200,64,0.9), inset 0 -6px 20px rgba(255,180,30,0.35);
+}
+
+/* ---------- Button area ---------- */
+.control {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  margin-top: 6px;
+}
+#spinBtn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 16px 56px;
+  border-radius: 40px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  background: linear-gradient(90deg, #ff9a00, #ff3d4b);
+  color: white;
+  box-shadow: 0 12px 30px rgba(255,80,30,0.14), 0 6px 18px rgba(255,80,30,0.12);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+#spinBtn:active { transform: translateY(2px) scale(0.995); }
+#spinBtn:disabled {
+  opacity: 0.6; cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* hasil tulisan */
+#result {
+  font-size: 1.1rem;
+  margin-top: 6px;
+  color: #00ff88;
+  text-shadow: 0 0 10px rgba(0,255,150,0.12);
+}
+
+/* ---------- small screens ---------- */
+@media (max-width:720px) {
+  :root{
+    --reel-width: 96px;
+    --reel-height: 280px;
+    --symbol-height: 64px;
+    --reel-gap: 12px;
+  }
+  h1 { font-size:1.6rem; }
+  .slot-wrap { gap: 12px; padding: 6px; }
+  #spinBtn { padding: 12px 36px; }
+}
+
+/* ---------- decorative foot spacing ---------- */
+.footer-space { height: 36px; }
+/* ---------- Animasi Reel Berputar ---------- */
+.reel-inner {
+  transition: transform 0.1s linear;
+  will-change: transform;
+}
+
+.reel {
+  overflow: hidden;
+  height: var(--reel-height);
+  width: var(--reel-width);
+  border-radius: 12px;
+  border: 4px solid #ffcf40;
+  box-shadow: 0 0 25px rgba(255, 200, 80, 0.4);
+}
